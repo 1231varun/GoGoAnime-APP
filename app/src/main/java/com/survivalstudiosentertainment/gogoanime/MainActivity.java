@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.webkit.WebBackForwardList;
 
 public class MainActivity extends Activity {
@@ -222,7 +223,7 @@ public class MainActivity extends Activity {
             if(prefs.getString("lastUrl",null) != null){
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
-                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) === "file:///android_asset/splash.html"){
+                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
                             String lastUrl = prefs.getString("lastUrl",defaultUrl);
                             if (url.contains("gogoanime")) {
                                 view.loadUrl(url);
