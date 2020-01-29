@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
     private SwipeRefreshLayout swipeLayout;
     private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     private String defaultUrl = "https://gogoanime.io";
+    private String splashUrl = "file:///android_asset/splash.html";
 
     /**
      * Called when the activity is first created.
@@ -219,8 +220,8 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
-            if(prefs.getString("lastUrl",null) != null){
+            private WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
+            if(prefs.getString("lastUrl",null) != null) {
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
                         if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
@@ -228,7 +229,6 @@ public class MainActivity extends Activity {
                             if (url.contains("gogoanime")) {
                                 view.loadUrl(url);
                             }
-                            return true;
                         }
                     }
             }
@@ -267,9 +267,10 @@ public class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url)
         {
-            if(webView.getUrl()!= "file:///android_asset/splash.html"){
+            private String currentUrl = webView.getUrl();
+            if(currentUrl!= splashUrl){
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("lastUrl",webView.getUrl());
+                editor.putString("lastUrl",currentUrl);
                 editor.commit();
             }
             // hide element by class name
