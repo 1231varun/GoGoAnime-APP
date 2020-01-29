@@ -232,8 +232,11 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show(); 
             if(currentUrl.equals(splashUrl)){
                 Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
-                if(lastSavedEpisodeUrl.)  
-                this.loadUrl(view, lastSavedEpisodeUrl);
+                if(lastSavedEpisodeUrl != null) {
+                    this.loadUrl(view, lastSavedEpisodeUrl);
+                    return true;
+                }
+                this.loadUrl(view, defaultUrl);
                 return true;
             }
             this.loadUrl(view, defaultUrl);
