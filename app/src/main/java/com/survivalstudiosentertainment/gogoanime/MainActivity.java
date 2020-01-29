@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 
     class myWebViewClient extends WebViewClient {
 
-        public void loadUrl(WebView view, String url){
+        public boolean loadUrl(WebView view, String url){
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             }
@@ -233,14 +233,14 @@ public class MainActivity extends Activity {
                 if(!lastSavedEpisodeUrl.isEmpty()) {
                     Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
                     this.loadUrl(view, lastSavedEpisodeUrl);
-                    return true;
                 }
                 Toast.makeText(getApplicationContext(),"else url ="+url,Toast.LENGTH_SHORT).show();
                 this.loadUrl(view, defaultUrl);
-                return true;
             }
             Toast.makeText(getApplicationContext(),"else else url ="+url,Toast.LENGTH_SHORT).show();
             this.loadUrl(view, defaultUrl);
+
+            return true;
         }
 
         @Override
