@@ -249,6 +249,13 @@ public class MainActivity extends Activity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon){
 
+            String currentUrl = webView.getUrl();
+            if(currentUrl != splashUrl){
+                Toast.makeText(getApplicationContext(),currentUrl +" "+ splashUrl,Toast.LENGTH_SHORT).show();  
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("lastUrl",currentUrl);
+                editor.commit();
+            }
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
@@ -272,14 +279,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            
-            String currentUrl = webView.getUrl();
-            if(currentUrl!= splashUrl){
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("lastUrl",currentUrl);
-                editor.commit();
-                Toast.makeText(getApplicationContext(),"saving"+currentUrl,Toast.LENGTH_SHORT).show();  
-            }
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
