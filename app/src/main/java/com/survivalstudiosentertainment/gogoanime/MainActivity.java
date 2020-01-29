@@ -232,7 +232,7 @@ public class MainActivity extends Activity {
             // Toast.makeText(getApplicationContext(),"prelastSavedEpisodeUrlvurl"+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();  
             if(mWebBackForwardList.getCurrentIndex() > 0) {
                 String previousUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
-                if(previousUrl == splashUrl){
+                if(previousUrl.equals(splashUrl)){
                     Toast.makeText(getApplicationContext(),"prevurl"+previousUrl,Toast.LENGTH_SHORT).show();  
                     this.loadUrl(view, lastSavedEpisodeUrl);
                     return true;
