@@ -230,7 +230,7 @@ public class MainActivity extends Activity {
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
             String currentUrl =  webView.getUrl();
             if(currentUrl.equals(splashUrl)){
-                if(lastSavedEpisodeUrl != null) {
+                if(lastSavedEpisodeUrl) {
                     Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
                     this.loadUrl(view, lastSavedEpisodeUrl);
                     return true;
