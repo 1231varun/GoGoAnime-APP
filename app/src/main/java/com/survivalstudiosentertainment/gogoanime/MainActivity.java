@@ -236,6 +236,8 @@ public class MainActivity extends Activity {
                     String historyUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
                     if(!historyUrl.equals(splashUrl)){
                         view.loadUrl(lastSavedEpisodeUrl);
+                    }else{
+                        view.loadUrl(defaultUrl);
                     }
                 }else{
                     view.loadUrl(defaultUrl);
