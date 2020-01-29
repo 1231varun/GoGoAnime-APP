@@ -229,11 +229,16 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",defaultUrl);
+            WebBackForwardList mWebBackForwardList = myWebView.copyBackForwardList();
+        
             if (url.contains("gogoanime")) {
-                if(lastSavedEpisodeUrl.isEmpty()){
-                        view.loadUrl(defaultUrl);
+                if (mWebBackForwardList.getCurrentIndex() > 0) {
+                    String historyUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
+                    if(!historyUrl.equals(splashUrl)){
+                        view.loadUrl(lastSavedEpisodeUrl);
+                    }
                 }else{
-                    view.loadUrl(lastSavedEpisodeUrl);
+                    view.loadUrl(defaultUrl);
                 }
             }
             return true;
