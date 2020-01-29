@@ -258,10 +258,10 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView view, String url)
         {
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("lastUrl",currentUrl);
+            editor.putString("lastUrl",webView.getUrl());
             editor.commit();
 
-            String text = prefs.getString("lastUrl");
+            String text = prefs.getString("lastUrl",null);
 
             Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();  
             
