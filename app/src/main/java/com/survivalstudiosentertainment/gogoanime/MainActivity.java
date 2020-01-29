@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         customViewContainer = (FrameLayout) findViewById(R.id.customViewContainer);
         webView = (WebView) findViewById(R.id.webView);
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
         mWebViewClient = new myWebViewClient();
         webView.setWebViewClient(mWebViewClient);
