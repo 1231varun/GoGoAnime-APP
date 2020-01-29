@@ -18,6 +18,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -26,6 +27,7 @@ public class MainActivity extends Activity {
     private View mCustomView;
     private myWebChromeClient mWebChromeClient;
     private myWebViewClient mWebViewClient;
+    private SwipeRefreshLayout swipeLayout;
 
     /**
      * Called when the activity is first created.
@@ -41,6 +43,8 @@ public class MainActivity extends Activity {
         customViewContainer = (FrameLayout) findViewById(R.id.customViewContainer);
         webView = (WebView) findViewById(R.id.webView);
 
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+
         mWebViewClient = new myWebViewClient();
         webView.setWebViewClient(mWebViewClient);
 
@@ -53,10 +57,22 @@ public class MainActivity extends Activity {
         webView.setHapticFeedbackEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
 
+        
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            //your method to refresh content
+        }
+        });
+
         if (savedInstanceState != null)
             webView.restoreState(savedInstanceState);
         else
         webView.loadUrl("file:///android_asset/splash.html");
+
+        if(swipeLayout.isRefreshing()) {
+            swipeLayout.setRefreshing(false);
+        }
     }
 
     @Override
@@ -250,7 +266,9 @@ public class MainActivity extends Activity {
                 }
             }, 500);
 
-
+            if (swipeLayout.isRefreshing()) {
+                swipeLayout.setRefreshing(false);
+            }
         }
     }
 
