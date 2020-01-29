@@ -22,6 +22,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.webkit.WebBackForwardList;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -220,21 +221,33 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Toast.makeText(getApplicationContext(),url+"inside override",Toast.LENGTH_SHORT).show();  
             WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
             if(prefs.getString("lastUrl",null) != null) {
+                Toast.makeText(getApplicationContext(),url+"inside override1",Toast.LENGTH_SHORT).show();  
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
+                        Toast.makeText(getApplicationContext(),url+"inside override2",Toast.LENGTH_SHORT).show();  
                         if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
                             String lastUrl = prefs.getString("lastUrl",defaultUrl);
+                            Toast.makeText(getApplicationContext(),"Last url "+lastUrl+" inside override3",Toast.LENGTH_SHORT).show(); 
                             if (url.contains("gogoanime")) {
+                                Toast.makeText(getApplicationContext(),url+"inside override4",Toast.LENGTH_SHORT).show();   
                                 view.loadUrl(url);
                             }
                         }
+                    }else{
+                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
+                            if (url.contains("gogoanime")) {
+                                Toast.makeText(getApplicationContext(),url+"inside 1",Toast.LENGTH_SHORT).show();  
+                                view.loadUrl(url);
+                            }
                     }
             }
             else {
                 if (url.contains("gogoanime")) {
                     view.loadUrl(url);
+                    Toast.makeText(getApplicationContext(),url+"inside 2",Toast.LENGTH_SHORT).show();  
                 }
             }
             return true;
