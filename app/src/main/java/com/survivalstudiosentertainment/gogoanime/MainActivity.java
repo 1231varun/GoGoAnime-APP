@@ -194,7 +194,7 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.contains("gogoanime.io")) {
+            if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             } else {
                 //Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
