@@ -233,8 +233,8 @@ public class MainActivity extends Activity {
             }
             return true;
         }
-
-        private loadUrl(url) {
+        @Override
+        public loadUrl(url) {
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             }
