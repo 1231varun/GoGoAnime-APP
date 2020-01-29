@@ -62,6 +62,7 @@ public class MainActivity extends Activity {
         @Override
         public void onRefresh() {
             //your method to refresh content
+            webView.loadUrl(webView.getUrl());
         }
         });
 
