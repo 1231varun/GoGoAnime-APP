@@ -214,11 +214,10 @@ public class MainActivity extends Activity {
 
     class myWebViewClient extends WebViewClient {
 
-        public boolean loadUrl(WebView view, String url){
+        public void loadUrl(WebView view, String url){
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             }
-            return true;
         }
 
         @Override
@@ -229,12 +228,22 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
+            if(!url.equals(splashUrl)){
+                if (url.contains("gogoanime")) {
+                    view.loadUrl(defaultUrl);
+                }
+            }
+            
+            else
+            
             if(lastSavedEpisodeUrl.isEmpty()){
                 if (url.contains("gogoanime")) {
                     view.loadUrl(defaultUrl);
                 }
             }else{
-                view.loadUrl(lastSavedEpisodeUrl);
+                if (url.contains("gogoanime")) {
+                    view.loadUrl(lastSavedEpisodeUrl);
+                }
             }
             return true;
         }
