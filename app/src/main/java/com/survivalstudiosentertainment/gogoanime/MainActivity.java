@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
     private myWebViewClient mWebViewClient;
     private SwipeRefreshLayout swipeLayout;
     private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    private String defaultUrl = 'https://gogoanime.io';
+    private String defaultUrl = "https://gogoanime.io";
 
     /**
      * Called when the activity is first created.
@@ -218,11 +218,11 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             WebBackForwardList mWebBackForwardList = myWebView.copyBackForwardList();
-            if(prefs.getString('lastUrl',null) !== null){
+            if(prefs.getString("lastUrl",null) !== null){
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
-                        if(mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl() === 'file:///android_asset/splash.html'){
-                            String lastUrl = prefs.getString('lastUrl',defaultUrl);
+                        if(mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl() === "file:///android_asset/splash.html"){
+                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
                             loadUrl(lastUrl);
                             return true;
                         }
