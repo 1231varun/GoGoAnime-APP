@@ -214,6 +214,12 @@ public class MainActivity extends Activity {
 
     class myWebViewClient extends WebViewClient {
 
+        public void loadUrl(WebView view, String url){
+            if (url.contains("gogoanime")) {
+                view.loadUrl(url);
+            }
+        }
+
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             view.loadUrl("file:///android_asset/error_page.html");
@@ -221,37 +227,45 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Toast.makeText(getApplicationContext(),url+"inside override",Toast.LENGTH_SHORT).show();  
-            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
-            if(prefs.getString("lastUrl",null) != null) {
-                Toast.makeText(getApplicationContext(),url+"inside override1",Toast.LENGTH_SHORT).show();  
-                if (mWebBackForwardList.getCurrentIndex() > 0)
-                    {
-                        Toast.makeText(getApplicationContext(),url+"inside override2",Toast.LENGTH_SHORT).show();  
-                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
-                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
-                            Toast.makeText(getApplicationContext(),"Last url "+lastUrl+" inside override3",Toast.LENGTH_SHORT).show(); 
-                            if (url.contains("gogoanime")) {
-                                Toast.makeText(getApplicationContext(),url+"inside override4",Toast.LENGTH_SHORT).show();   
-                                view.loadUrl(url);
-                            }
-                        }
-                    }else{
-                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
-                            if (url.contains("gogoanime")) {
-                                Toast.makeText(getApplicationContext(),url+"inside 1",Toast.LENGTH_SHORT).show();  
-                                view.loadUrl(url);
-                            }
-                    }
-            }
-            else {
-                if (url.contains("gogoanime")) {
-                    view.loadUrl(url);
-                    Toast.makeText(getApplicationContext(),url+"inside 2",Toast.LENGTH_SHORT).show();  
-                }
-            }
+            this.loadUrl(view, url);
             return true;
         }
+
+        // @Override
+        // public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        //     Toast.makeText(getApplicationContext(),url+"inside override",Toast.LENGTH_SHORT).show();  
+        //     WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
+        //     if(prefs.getString("lastUrl",null) != null) {
+        //         Toast.makeText(getApplicationContext(),url+"inside override1",Toast.LENGTH_SHORT).show();  
+        //         if (mWebBackForwardList.getCurrentIndex() > 0)
+        //             {
+        //                 Toast.makeText(getApplicationContext(),url+"inside override2",Toast.LENGTH_SHORT).show();  
+        //                 if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
+        //                     String lastUrl = prefs.getString("lastUrl",defaultUrl);
+        //                     Toast.makeText(getApplicationContext(),"Last url "+lastUrl+" inside override3",Toast.LENGTH_SHORT).show(); 
+        //                     if (url.contains("gogoanime")) {
+        //                         Toast.makeText(getApplicationContext(),url+"inside override4",Toast.LENGTH_SHORT).show();   
+        //                         view.loadUrl(url);
+        //                     }
+        //                 }else{
+                            
+        //                 }
+        //             }else{
+        //                     String lastUrl = prefs.getString("lastUrl",defaultUrl);
+        //                     if (url.contains("gogoanime")) {
+        //                         Toast.makeText(getApplicationContext(),url+"inside 1",Toast.LENGTH_SHORT).show();  
+        //                         view.loadUrl(url);
+        //                     }
+        //             }
+        //     }
+        //     else {
+        //         if (url.contains("gogoanime")) {
+        //             view.loadUrl(url);
+        //             Toast.makeText(getApplicationContext(),url+"inside 2",Toast.LENGTH_SHORT).show();  
+        //         }
+        //     }
+        //     return true;
+        // }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon){
