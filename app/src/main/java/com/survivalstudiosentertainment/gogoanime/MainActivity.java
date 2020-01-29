@@ -228,20 +228,8 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            String lastSavedEpisodeUrl = prefs.getString("lastUrl",defaultUrl);
-            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
-        
             if (url.contains("gogoanime")) {
-                if (mWebBackForwardList.getCurrentIndex() > 0) {
-                    String historyUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
-                    if(!historyUrl.equals(splashUrl)){
-                        view.loadUrl(lastSavedEpisodeUrl);
-                    }else{
-                        view.loadUrl(defaultUrl);
-                    }
-                }else{
-                    view.loadUrl(defaultUrl);
-                }
+                view.loadUrl(url);
             }
             return true;
         }
@@ -280,6 +268,9 @@ public class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url) {
             // hide element by class name
+            webView.loadUrl("javascript:(function() { " +
+                    "var listContainer = document.getElementsByClassName('menu_top')[0].getElementsByTagName('ul')[0];"+
+                    "listContainer.appendChild('<li class='user'><a href='"+prefs.getString('lastUrl')+"'' class='account'>Last Visted URL</a></li>')");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
