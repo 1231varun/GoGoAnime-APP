@@ -269,8 +269,8 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView view, String url) {
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
-                    "var listContainer = document.getElementsByClassName('menu_top')[0].getElementsByTagName('ul')[0];"+
-                    "listContainer.appendChild('<li class='user'><a href='"+prefs.getString("lastUrl",webView.getUrl())+"'' class='account'>Last Visted URL</a></li>')");
+                    "var listContainer = document.getElementsByClassName('menu_top')[0].getElementsByTagName('ul')[0].firstElementChild;"+
+                    "listContainer.outerHtml.append = '<li class='user'><a href='"+prefs.getString("lastUrl",webView.getUrl())+"'' class='account'>Last Visted URL</a></li>'");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
