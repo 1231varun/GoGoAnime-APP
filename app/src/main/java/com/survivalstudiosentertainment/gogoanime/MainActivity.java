@@ -22,7 +22,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.webkit.WebBackForwardList;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -33,6 +32,8 @@ public class MainActivity extends Activity {
     private myWebViewClient mWebViewClient;
     private SwipeRefreshLayout swipeLayout;
     private SharedPreferences prefs;
+    private String defaultUrl = "https://gogoanime.io";
+    private String splashUrl = "file:///android_asset/splash.html";
 
     /**
      * Called when the activity is first created.
@@ -40,7 +41,7 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        prefs = getSharedPreferences('lastUrl','https://gogoanime.io');
+        prefs = getSharedPreferences("lastUrl",0);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -219,11 +220,22 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.contains("gogoanime")) {
-                view.loadUrl(url);
-            } else {
-                //Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                //startActivity(webIntent);
+            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
+            if(prefs.getString("lastUrl",null) != null) {
+                if (mWebBackForwardList.getCurrentIndex() > 0)
+                    {
+                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
+                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
+                            if (url.contains("gogoanime")) {
+                                view.loadUrl(url);
+                            }
+                        }
+                    }
+            }
+            else {
+                if (url.contains("gogoanime")) {
+                    view.loadUrl(url);
+                }
             }
             return true;
         }
@@ -232,8 +244,6 @@ public class MainActivity extends Activity {
         public void onPageStarted(WebView view, String url, Bitmap favicon){
 
             // hide element by class name
-            webView.loadUrl("javascript:(function() { " +
-                    "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
@@ -255,26 +265,22 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onPageFinished(WebView view, String url)
-        {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("lastUrl",webView.getUrl());
-            editor.commit();
-
-            String text = prefs.getString("lastUrl",null);
-
-            Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();  
+        public void onPageFinished(WebView view, String url) {
             
+            String currentUrl = webView.getUrl();
+            if(currentUrl!= splashUrl){
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("lastUrl",currentUrl);
+                editor.commit();
+            }
             // hide element by class name
-            webView.loadUrl("javascript:(function() { " +
-                    "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('ads_mobile')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_items')[0].style.display='none'; })()");
-            // hide element by id
+           // hide element by id
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
