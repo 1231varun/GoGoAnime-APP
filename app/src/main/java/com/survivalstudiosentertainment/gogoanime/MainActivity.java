@@ -167,6 +167,8 @@ public class MainActivity extends Activity {
             }
             mCustomView = view;
             webView.setVisibility(View.GONE);
+            swipeLayout.setVisibility(View.GONE);
+
             customViewContainer.setVisibility(View.VISIBLE);
             customViewContainer.addView(view);
             customViewCallback = callback;
@@ -189,6 +191,7 @@ public class MainActivity extends Activity {
                 return;
 
             webView.setVisibility(View.VISIBLE);
+            swipeLayout.setVisibility(View.VISIBLE);
             customViewContainer.setVisibility(View.GONE);
 
             // Hide the custom view.
