@@ -19,6 +19,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.webkit.WebBackForwardList;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -28,6 +32,7 @@ public class MainActivity extends Activity {
     private myWebChromeClient mWebChromeClient;
     private myWebViewClient mWebViewClient;
     private SwipeRefreshLayout swipeLayout;
+    private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
     /**
      * Called when the activity is first created.
@@ -252,7 +257,14 @@ public class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url)
         {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("lastUrl",currentUrl);
+            editor.commit();
 
+            String text = prefs.getString("lastUrl");
+
+            Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();  
+            
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
