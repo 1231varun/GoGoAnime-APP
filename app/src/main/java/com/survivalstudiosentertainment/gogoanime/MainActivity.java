@@ -223,7 +223,7 @@ public class MainActivity extends Activity {
                     {
                         if(mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl() === "file:///android_asset/splash.html"){
                             String lastUrl = prefs.getString("lastUrl",defaultUrl);
-                            loadUrl(lastUrl);
+                            loadUrl(view, lastUrl);
                             return true;
                         }
                     }
@@ -234,7 +234,7 @@ public class MainActivity extends Activity {
             return true;
         }
         @Override
-        public loadUrl(url) {
+        public loadUrl(WebView view, String url) {
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             }
