@@ -218,24 +218,13 @@ public class MainActivity extends Activity {
             view.loadUrl("file:///android_asset/error_page.html");
         }
 
-        @Override
+         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
-            if(prefs.getString("lastUrl",null) != null) {
-                if (mWebBackForwardList.getCurrentIndex() > 0)
-                    {
-                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
-                            String lastUrl = prefs.getString("lastUrl",defaultUrl);
-                            if (url.contains("gogoanime")) {
-                                view.loadUrl(url);
-                            }
-                        }
-                    }
-            }
-            else {
-                if (url.contains("gogoanime")) {
-                    view.loadUrl(url);
-                }
+            if (url.contains("gogoanime")) {
+                view.loadUrl(url);
+            } else {
+                //Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                //startActivity(webIntent);
             }
             return true;
         }
