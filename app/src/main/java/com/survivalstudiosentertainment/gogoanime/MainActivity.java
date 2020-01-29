@@ -265,9 +265,9 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onPageFinished(WebView view, String url)
-        {
-            private String currentUrl = webView.getUrl();
+        public void onPageFinished(WebView view, String url) {
+            
+            String currentUrl = webView.getUrl();
             if(currentUrl!= splashUrl){
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("lastUrl",currentUrl);
