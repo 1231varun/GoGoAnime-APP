@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
         
             if (url.contains("gogoanime")) {
                 if (mWebBackForwardList.getCurrentIndex() > 0) {
-                    String historyUrl = webView.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
+                    String historyUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
                     if(!historyUrl.equals(splashUrl)){
                         view.loadUrl(lastSavedEpisodeUrl);
                     }
