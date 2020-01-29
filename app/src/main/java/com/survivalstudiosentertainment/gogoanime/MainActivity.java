@@ -218,6 +218,7 @@ public class MainActivity extends Activity {
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
             }
+            return true;
         }
 
         @Override
@@ -240,7 +241,6 @@ public class MainActivity extends Activity {
             }
             Toast.makeText(getApplicationContext(),"else else url ="+url,Toast.LENGTH_SHORT).show();
             this.loadUrl(view, defaultUrl);
-            return true;
         }
 
         @Override
