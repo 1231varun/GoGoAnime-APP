@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     private SwipeRefreshLayout swipeLayout;
     private SharedPreferences prefs;
     private String defaultUrl = "https://gogoanime.io";
-    private String splashUrl = "file:///android_asset/splash.html";
+    private String splashUrl = "https://loadlasturl.gogoanim.io";
 
     /**
      * Called when the activity is first created.
