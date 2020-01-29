@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
             if (webView.canGoBack()) {
-                if((webUrl.equals("https://gogoanime.io/"))||(webUrl.equals("file:///android_asset/error_page.html")||(webUrl.equals("file:///android_asset/splash.html"))){
+                if((webUrl.equals("https://gogoanime.io/"))||(webUrl.equals("file:///android_asset/error_page.html")||(webUrl.equals("file:///android_asset/splash.html")))){
                     new AlertDialog.Builder(this).setTitle("GoGoAnime")
                             .setIcon(R.mipmap.ic_launcher)
                             .setMessage("Are you sure you want to exit the app?")
