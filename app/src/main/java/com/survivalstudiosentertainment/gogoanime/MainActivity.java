@@ -251,7 +251,7 @@ public class MainActivity extends Activity {
 
             String currentUrl = webView.getUrl();
             if(!currentUrl.equals(splashUrl) && currentUrl.contains('episode-')){
-                Toast.makeText(getApplicationContext(),currentUrl +" "+ splashUrl,Toast.LENGTH_SHORT).show();  
+                Toast.makeText(getApplicationContext(),currentUrl+"saving",Toast.LENGTH_SHORT).show();  
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("lastUrl",currentUrl);
                 editor.commit();
