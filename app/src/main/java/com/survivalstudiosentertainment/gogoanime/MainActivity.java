@@ -220,7 +220,7 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            private WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
+            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
             if(prefs.getString("lastUrl",null) != null) {
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
