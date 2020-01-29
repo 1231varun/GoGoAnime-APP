@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     private SwipeRefreshLayout swipeLayout;
     private SharedPreferences prefs;
     private String defaultUrl = "https://gogoanime.io";
-    private String splashUrl = "https://loadlasturl.gogoanim.io";
+    private String splashUrl = "https://loadlasturl.gogoanime.io";
 
     /**
      * Called when the activity is first created.
@@ -227,9 +227,12 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);  
-            if(webView.getUrl().equals(splashUrl)){
-                Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();  
+            String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
+            String currentUrl =  webView.getUrl();
+            Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show(); 
+            if(currentUrl.equals(splashUrl)){
+                Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
+                if(lastSavedEpisodeUrl.)  
                 this.loadUrl(view, lastSavedEpisodeUrl);
                 return true;
             }
