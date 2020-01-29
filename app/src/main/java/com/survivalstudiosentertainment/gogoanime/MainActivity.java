@@ -229,54 +229,22 @@ public class MainActivity extends Activity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
-
+            Toast.makeText(getApplicationContext(),"prelastSavedEpisodeUrlvurl"+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();  
             if(mWebBackForwardList.getCurrentIndex() > 0) {
                 String previousUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
                 if(previousUrl == splashUrl){
+                    Toast.makeText(getApplicationContext(),"prevurl"+previousUrl,Toast.LENGTH_SHORT).show();  
                     this.loadUrl(view, lastSavedEpisodeUrl);
+                    return true;
                 }else{
+                    Toast.makeText(getApplicationContext(),"else prev",Toast.LENGTH_SHORT).show();  
                     this.loadUrl(view,url);
+                    return true;
                 }
             }
             this.loadUrl(view, url);
             return true;
         }
-
-        // @Override
-        // public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        //     Toast.makeText(getApplicationContext(),url+"inside override",Toast.LENGTH_SHORT).show();  
-        //     WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
-        //     if(prefs.getString("lastUrl",null) != null) {
-        //         Toast.makeText(getApplicationContext(),url+"inside override1",Toast.LENGTH_SHORT).show();  
-        //         if (mWebBackForwardList.getCurrentIndex() > 0)
-        //             {
-        //                 Toast.makeText(getApplicationContext(),url+"inside override2",Toast.LENGTH_SHORT).show();  
-        //                 if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) == ("file:///android_asset/splash.html")){
-        //                     String lastUrl = prefs.getString("lastUrl",defaultUrl);
-        //                     Toast.makeText(getApplicationContext(),"Last url "+lastUrl+" inside override3",Toast.LENGTH_SHORT).show(); 
-        //                     if (url.contains("gogoanime")) {
-        //                         Toast.makeText(getApplicationContext(),url+"inside override4",Toast.LENGTH_SHORT).show();   
-        //                         view.loadUrl(url);
-        //                     }
-        //                 }else{
-                            
-        //                 }
-        //             }else{
-        //                     String lastUrl = prefs.getString("lastUrl",defaultUrl);
-        //                     if (url.contains("gogoanime")) {
-        //                         Toast.makeText(getApplicationContext(),url+"inside 1",Toast.LENGTH_SHORT).show();  
-        //                         view.loadUrl(url);
-        //                     }
-        //             }
-        //     }
-        //     else {
-        //         if (url.contains("gogoanime")) {
-        //             view.loadUrl(url);
-        //             Toast.makeText(getApplicationContext(),url+"inside 2",Toast.LENGTH_SHORT).show();  
-        //         }
-        //     }
-        //     return true;
-        // }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon){
@@ -310,6 +278,7 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("lastUrl",currentUrl);
                 editor.commit();
+                Toast.makeText(getApplicationContext(),"saving"+currentUrl,Toast.LENGTH_SHORT).show();  
             }
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
