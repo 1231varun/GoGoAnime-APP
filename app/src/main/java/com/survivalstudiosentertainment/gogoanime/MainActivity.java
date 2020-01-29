@@ -229,18 +229,17 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
-            if(url.equals(splashUrl)){
-                if(!lastSavedEpisodeUrl.isEmpty()) {
-                    Toast.makeText(getApplicationContext(),"url ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
-                    this.loadUrl(view, lastSavedEpisodeUrl);
-                }
-                Toast.makeText(getApplicationContext(),"else url ="+url,Toast.LENGTH_SHORT).show();
-                this.loadUrl(view, defaultUrl);
+            if(!url.equals(splashUrl)){
+                Toast.makeText(getApplicationContext(),"not splash ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
+                return this.loadUrl(view, defaultUrl);
             }
-            Toast.makeText(getApplicationContext(),"else else url ="+url,Toast.LENGTH_SHORT).show();
-            this.loadUrl(view, defaultUrl);
 
-            return true;
+            if(!lastSavedEpisodeUrl.isEmpty()) {
+                Toast.makeText(getApplicationContext(),"last ="+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();
+                return this.loadUrl(view, lastSavedEpisodeUrl);
+            }
+            Toast.makeText(getApplicationContext(),"else url ="+url,Toast.LENGTH_SHORT).show();
+            return this.loadUrl(view, defaultUrl);
         }
 
         @Override
