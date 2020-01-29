@@ -250,7 +250,7 @@ public class MainActivity extends Activity {
         public void onPageStarted(WebView view, String url, Bitmap favicon){
 
             String currentUrl = webView.getUrl();
-            if(currentUrl != splashUrl){
+            if(!currentUrl.equals(splashUrl) && currentUrl.contains('episode-')){
                 Toast.makeText(getApplicationContext(),currentUrl +" "+ splashUrl,Toast.LENGTH_SHORT).show();  
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("lastUrl",currentUrl);
