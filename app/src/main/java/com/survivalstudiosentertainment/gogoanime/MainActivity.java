@@ -221,7 +221,7 @@ public class MainActivity extends Activity {
             if(prefs.getString("lastUrl",null) != null){
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
-                        if(mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl() === "file:///android_asset/splash.html"){
+                        if((mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl()) === "file:///android_asset/splash.html"){
                             String lastUrl = prefs.getString("lastUrl",defaultUrl);
                             loadUrl(view, lastUrl);
                             return true;
@@ -229,7 +229,7 @@ public class MainActivity extends Activity {
                     }
             }
             else {
-                loadUrl(url);
+                loadUrl(view, url);
             }
             return true;
         }
