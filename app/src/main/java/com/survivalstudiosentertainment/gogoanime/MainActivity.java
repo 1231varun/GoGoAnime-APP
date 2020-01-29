@@ -229,15 +229,15 @@ public class MainActivity extends Activity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
-            Toast.makeText(getApplicationContext(),"prelastSavedEpisodeUrlvurl"+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();  
+            // Toast.makeText(getApplicationContext(),"prelastSavedEpisodeUrlvurl"+lastSavedEpisodeUrl,Toast.LENGTH_SHORT).show();  
             if(mWebBackForwardList.getCurrentIndex() > 0) {
                 String previousUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
                 if(previousUrl == splashUrl){
-                    Toast.makeText(getApplicationContext(),"prevurl"+previousUrl,Toast.LENGTH_SHORT).show();  
+                    // Toast.makeText(getApplicationContext(),"prevurl"+previousUrl,Toast.LENGTH_SHORT).show();  
                     this.loadUrl(view, lastSavedEpisodeUrl);
                     return true;
                 }else{
-                    Toast.makeText(getApplicationContext(),"else prev",Toast.LENGTH_SHORT).show();  
+                    // Toast.makeText(getApplicationContext(),"else prev",Toast.LENGTH_SHORT).show();  
                     this.loadUrl(view,url);
                     return true;
                 }
