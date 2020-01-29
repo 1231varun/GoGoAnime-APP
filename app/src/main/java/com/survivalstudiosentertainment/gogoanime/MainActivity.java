@@ -267,9 +267,9 @@ public class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url)
         {
-            if(webView.getUrl()!== 'file:///android_asset/splash.html'){
+            if(webView.getUrl()!== "file:///android_asset/splash.html"){
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString('lastUrl',webView.getUrl());
+                editor.putString("lastUrl",webView.getUrl());
                 editor.commit();
             }
             // hide element by class name
