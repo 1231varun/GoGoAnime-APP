@@ -229,12 +229,10 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             String lastSavedEpisodeUrl = prefs.getString("lastUrl",defaultUrl);
-            if(lastSavedEpisodeUrl.isEmpty()){
-                if (url.contains("gogoanime")) {
-                    view.loadUrl(defaultUrl);
-                }
-            }else{
-                if (url.contains("gogoanime")) {
+            if (url.contains("gogoanime")) {
+                if(lastSavedEpisodeUrl.isEmpty()){
+                        view.loadUrl(defaultUrl);
+                }else{
                     view.loadUrl(lastSavedEpisodeUrl);
                 }
             }
