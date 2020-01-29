@@ -228,7 +228,7 @@ public class MainActivity extends Activity {
 
             // hide element by class name
             webView.loadUrl("javascript:(function() { " +
-                    "document.getElementsByClassName('_gc2zius').style.display='none'; })()");
+                    "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
