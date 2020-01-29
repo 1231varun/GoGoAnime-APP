@@ -227,6 +227,17 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
+            String lastSavedEpisodeUrl = prefs.getString("lastUrl",null);
+
+            if(mWebBackForwardList.getCurrentIndex() > 0) {
+                String previousUrl = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl();
+                if(previousUrl == splashUrl){
+                    this.loadUrl(view, lastSavedEpisodeUrl);
+                }else{
+                    this.loadUrl(view,url);
+                }
+            }
             this.loadUrl(view, url);
             return true;
         }
