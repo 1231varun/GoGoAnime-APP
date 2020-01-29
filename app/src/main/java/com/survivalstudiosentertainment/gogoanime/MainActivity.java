@@ -19,9 +19,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.webkit.WebBackForwardList;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -31,9 +28,6 @@ public class MainActivity extends Activity {
     private myWebChromeClient mWebChromeClient;
     private myWebViewClient mWebViewClient;
     private SwipeRefreshLayout swipeLayout;
-    private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    private String defaultUrl = "https://gogoanime.io";
-    private String splashUrl = "file:///android_asset/splash.html";
 
     /**
      * Called when the activity is first created.
@@ -218,7 +212,7 @@ public class MainActivity extends Activity {
             view.loadUrl("file:///android_asset/error_page.html");
         }
 
-         @Override
+        @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.contains("gogoanime")) {
                 view.loadUrl(url);
@@ -233,6 +227,8 @@ public class MainActivity extends Activity {
         public void onPageStarted(WebView view, String url, Bitmap favicon){
 
             // hide element by class name
+            webView.loadUrl("javascript:(function() { " +
+                    "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
@@ -254,22 +250,19 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onPageFinished(WebView view, String url) {
-            
-            String currentUrl = webView.getUrl();
-            if(currentUrl!= splashUrl){
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("lastUrl",currentUrl);
-                editor.commit();
-            }
+        public void onPageFinished(WebView view, String url)
+        {
+
             // hide element by class name
+            webView.loadUrl("javascript:(function() { " +
+                    "document.getElementsById('_ea90odf_2397038')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_center')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('ads_mobile')[0].style.display='none'; })()");
             webView.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('banner_items')[0].style.display='none'; })()");
-           // hide element by id
+            // hide element by id
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
