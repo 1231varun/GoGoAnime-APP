@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     private myWebChromeClient mWebChromeClient;
     private myWebViewClient mWebViewClient;
     private SwipeRefreshLayout swipeLayout;
-    private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    private SharedPreferences prefs;
 
     /**
      * Called when the activity is first created.
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        prefs = getSharedPreferences('lastUrl','https://gogoanime.io');
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
