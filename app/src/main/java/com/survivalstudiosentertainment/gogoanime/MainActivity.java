@@ -218,7 +218,7 @@ public class MainActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             WebBackForwardList mWebBackForwardList = myWebView.copyBackForwardList();
-            if(prefs.getString("lastUrl",null) !== null){
+            if(prefs.getString("lastUrl",null) != null){
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
                         if(mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()-1).getUrl() === "file:///android_asset/splash.html"){
@@ -267,7 +267,7 @@ public class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url)
         {
-            if(webView.getUrl()!== "file:///android_asset/splash.html"){
+            if(webView.getUrl()!= "file:///android_asset/splash.html"){
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("lastUrl",webView.getUrl());
                 editor.commit();
