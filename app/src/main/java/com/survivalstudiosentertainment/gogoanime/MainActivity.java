@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.content.SharedPreferences;
+import android.webkit.WebBackForwardList;
 
 public class MainActivity extends Activity {
     private WebView webView;
@@ -217,7 +218,7 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            WebBackForwardList mWebBackForwardList = myWebView.copyBackForwardList();
+            WebBackForwardList mWebBackForwardList = webView.copyBackForwardList();
             if(prefs.getString("lastUrl",null) != null){
                 if (mWebBackForwardList.getCurrentIndex() > 0)
                     {
